@@ -11,10 +11,16 @@
           @open="handleOpen"
           @close="handleClose"
         >
-          <el-menu-item @click="addTag(item)" v-for="item in menuList" :key="item.name" :index="item.url">
-            <el-icon><aim /></el-icon>
-            <template #title>{{item.name}}</template>
-          </el-menu-item>
+          <template v-for="item in menuList" :key="item.name">
+            <el-menu-item v-if="item.children === undefined" @click="addTag(item)" :index="item.url">
+              <el-icon><aim /></el-icon>
+              <template #title>{{item.name}}</template>
+            </el-menu-item>
+            <el-sub-menu v-else>
+              <template #title>{{item.name}}</template>
+              <el-menu-item v-for="i in item.children" :key="i.name" :index="i.url" @click="addTag(i)">{{i.name}}</el-menu-item>
+            </el-sub-menu>
+          </template>
         </el-menu>
       </el-aside>
       <el-container>
@@ -73,13 +79,30 @@ export default {
       },
       {
         name: '产品',
-        type: 'info',
+        type: 'success',
         url: '/goods'
       },
       {
         name: '会员',
         type: 'danger',
         url: '/member'
+      },
+      {
+        name: '图表',
+        type: 'warning',
+        url: '/chart',
+        children: [
+          {
+            name: '线性图',
+            type: 'info',
+            url: '/chart/lineChart'
+          },
+          {
+            name: '饼图',
+            type: 'info',
+            url: '/chart/pieChart'
+          }
+        ]
       }
     ])
     let tags = reactive([])
@@ -158,6 +181,10 @@ export default {
       background-color: #304055;
       .el-menu {
         background-color: unset;
+        .el-sub-menu {
+          background-color: unset;
+          color: #fff;
+        }
       }
       .el-menu-item {
         display: flex;
@@ -205,6 +232,33 @@ export default {
         cursor: pointer;
       }
     }
+  }
+}
+</style>
+<style lang="less">
+.el-menu {
+  background-color: unset;
+}
+.el-sub-menu__title {
+  color: #fff !important;
+  font-size: 14px;
+}
+
+.el-sub-menu__title:hover {
+  background-color: #1e2635;
+  .el-menu-item {
+    display: flex;
+    color: #fff;
+  }
+  .el-menu-item:hover {
+    background-color: #1e2635;
+  }
+  .el-menu-item.is-active {
+    color: #409eff;
+  }
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
   }
 }
 </style>

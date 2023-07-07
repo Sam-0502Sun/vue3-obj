@@ -25,6 +25,23 @@ const routes = [
         path: '/goods',
         name: 'Goods',
         component: () => import('../views/goods/goods-index')
+      },
+      {
+        path: '/chart',
+        name: 'Chart',
+        component: () => import('../views/chart/chart-index'),
+        children: [
+          {
+            path: '/chart/lineChart',
+            name: 'LineChart',
+            component: () => import('../views/chart/line-chart/line-index')
+          },
+          {
+            path: '/chart/pieChart',
+            name: 'PieChart',
+            component: () => import('../views/chart/pie-chart/pie-index')
+          }
+        ]
       }
     ]
   }
