@@ -21,7 +21,7 @@
         <el-header>
           <div class="header-right">
             <screenfull id="screenfull" class="right-fullscreen" />
-            <Avatar class="avatar" />
+            <Avatar class="avatar" @child = 'clickEvent' />
           </div>
         </el-header>
         <div class="main-top">
@@ -121,6 +121,12 @@ export default {
       address.value = item.url
     }
 
+    // 子组件用户头像点击事件传值，判断是否需要激活tag
+    const clickEvent = (val) => {
+      addTag(val)
+      address.value = val.url
+    }
+
     return {
       isCollapse,
       changeAsideMenu,
@@ -129,7 +135,8 @@ export default {
       addTag,
       closeTag,
       clickTag,
-      address
+      address,
+      clickEvent
     }
   }
 }
@@ -148,9 +155,19 @@ export default {
     }
     .el-aside {
       width: unset;
-      background-color: skyblue;
+      background-color: #304055;
+      .el-menu {
+        background-color: unset;
+      }
       .el-menu-item {
         display: flex;
+        color: #fff;
+      }
+      .el-menu-item:hover {
+        background-color: #1e2635;
+      }
+      .el-menu-item.is-active {
+        color: #409eff;
       }
       .el-menu-vertical-demo:not(.el-menu--collapse) {
         width: 200px;
@@ -158,7 +175,8 @@ export default {
       }
     }
     .el-header {
-      background-color: salmon;
+      background-color: #fff;
+      border-bottom: 1px solid #333;
       display: flex;
       align-items: center;
       position: relative;
@@ -173,7 +191,7 @@ export default {
         }
         .avatar {
           display: block;
-          margin: 0 5px;
+          margin: 0 20px 0 5px;
         }
       }
     }
