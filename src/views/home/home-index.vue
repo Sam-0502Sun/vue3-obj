@@ -1,5 +1,5 @@
 <template>
-  <div>我是主页</div>
+  <div v-swipe-in>我是主页</div>
 </template>
 
 <script>

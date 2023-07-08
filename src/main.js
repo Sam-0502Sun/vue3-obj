@@ -8,6 +8,8 @@ import 'element-plus/dist/index.css'
 // 引入全局样式
 import '@/assets/styles/common.less'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+// 引入自定义指令
+import swipeIn from '@/utiles/directive/swipe-in'
 
 const app = createApp(App)
 
@@ -15,7 +17,9 @@ const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
-
+app.directive('swipeIn', {
+  swipeIn
+})
 app.use(store)
 app.use(router)
 app.use(ElementPlus)

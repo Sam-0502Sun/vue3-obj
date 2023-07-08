@@ -31,21 +31,23 @@
           </div>
         </el-header>
         <div class="main-top">
-          <el-button v-if="isCollapse === false" type="primary" plain @click="changeAsideMenu">123</el-button>
-          <el-button v-else type="primary" plain @click="changeAsideMenu">456</el-button>
+          <el-icon class="border-collapse" size="20" v-if="isCollapse === false" @click="changeAsideMenu"><Fold /></el-icon>
+          <el-icon class="border-collapse" size="20" v-else @click="changeAsideMenu"><Expand /></el-icon>
           <div class="tag-group">
-            <span class="tag-group__title">Dark</span>
+            <span v-show="tags.length !== 0" class="tag-group__title">Tag标签</span>
             <el-tag
               v-for="item in tags"
               :key="item.name"
-              :type="item.type"
               effect="dark"
               closable
               @close="closeTag(item)"
               @click="clickTag(item)"
+              @change="onChange(item)"
+              :class="item.url === address ? 'isActive' : ''"
             >
-              {{ item.name }}
+              <span>{{ item.name }}</span>
             </el-tag>
+            <el-button v-show="tags.length !== 0" @click="closeTagList" size="small" type="danger" :icon="Delete" circle />
           </div>
         </div>
         <el-main>
@@ -58,6 +60,7 @@
 
 <script>
 import Screenfull from '@/components/screenfull/index'
+import { Delete } from '@element-plus/icons-vue'
 import Avatar from '@/components/avatar/index'
 import { reactive, ref } from 'vue'
 import router from '@/router'
@@ -108,6 +111,7 @@ export default {
     let tags = reactive([])
     const address = ref('')
     const store = useStore()
+    const checked = ref(false)
     tags = store.state.tag.tags
     address.value = router.currentRoute.value.path
 
@@ -125,6 +129,7 @@ export default {
         store.commit('tag/addTage', tags)
         console.log(false)
       }
+      clickTag(item)
     }
     // 点击关闭tag
     const closeTag = (item) => {
@@ -150,6 +155,17 @@ export default {
       address.value = val.url
     }
 
+    const onChange = (item) => {
+      if (item.url === address.value) {
+        checked.value = true
+      }
+    }
+
+    const closeTagList = () => {
+      tags.length = 0
+      store.commit('tag/addTage', tags)
+    }
+
     return {
       isCollapse,
       changeAsideMenu,
@@ -159,7 +175,11 @@ export default {
       closeTag,
       clickTag,
       address,
-      clickEvent
+      clickEvent,
+      onChange,
+      checked,
+      closeTagList,
+      Delete
     }
   }
 }
@@ -181,6 +201,7 @@ export default {
       background-color: #304055;
       .el-menu {
         background-color: unset;
+        border-right: 1px solid #333;
         .el-sub-menu {
           background-color: unset;
           color: #fff;
@@ -223,13 +244,33 @@ export default {
       }
     }
     .main-top {
-      height: 50px;
+      height: 33px;
       display: flex;
       align-items: center;
+      line-height: 34px;
       border-bottom: 1px solid #333;
-      .el-tag {
-        margin: 0 10px;
+      padding: 0 10px;
+
+      .border-collapse {
         cursor: pointer;
+      }
+
+      .el-tag {
+        margin: 0 5px;
+        cursor: pointer;
+        background-color: unset;
+        color: #333333;
+        border: 1px solid #c0bbbb;
+        span:before {
+        }
+      }
+      .isActive {
+        background-color: #42b983;
+        color: #ffffff;
+      }
+      .close-icon {
+        cursor: pointer;
+        align-items: center;
       }
     }
   }
@@ -260,5 +301,8 @@ export default {
     width: 200px;
     min-height: 400px;
   }
+}
+.el-tag .el-tag__close {
+  color: #333 !important;
 }
 </style>
