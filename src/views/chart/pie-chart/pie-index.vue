@@ -1,5 +1,7 @@
 <template>
-  <div>饼图</div>
+  <div v-transverse-slide>
+    <div>饼图</div>
+  </div>
 </template>
 
 <script>

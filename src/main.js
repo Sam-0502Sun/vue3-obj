@@ -9,7 +9,7 @@ import 'element-plus/dist/index.css'
 import '@/assets/styles/common.less'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // 引入自定义指令
-import swipeIn from '@/utiles/directive/swipe-in'
+import TransverseSlide from '@/utiles/directive/transverse-slide' // 横向滑入
 
 const app = createApp(App)
 
@@ -17,9 +17,7 @@ const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
-app.directive('swipeIn', {
-  swipeIn
-})
+app.directive('TransverseSlide', TransverseSlide) // 全局注册横向滑入指令
 app.use(store)
 app.use(router)
 app.use(ElementPlus)

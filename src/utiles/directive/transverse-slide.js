@@ -1,12 +1,13 @@
+// 滑入动效自定义指令
 const DISTANCE = -150
-const DURATION = 2000
+const DURATION = 1500
 
 export default {
   mounted (el) {
-    el.swipeIn = el.animate([
+    el.animate([
       {
         transform: `translateX(${DISTANCE}px)`,
-        opacity: 0.5
+        opacity: 0
       },
       {
         transform: 'translateX(0)',

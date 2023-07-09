@@ -1,10 +1,18 @@
 <template>
-  <div>Member page</div>
+  <div v-transverse-slide>
+    <div>Member page</div>
+    <TopBox />
+  </div>
 </template>
 
 <script>
+import TopBox from './components/top-box'
+
 export default {
-  name: 'MemberIndex'
+  name: 'MemberIndex',
+  components: {
+    TopBox
+  }
 }
 </script>
 

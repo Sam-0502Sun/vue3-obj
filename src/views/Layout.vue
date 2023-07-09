@@ -2,7 +2,7 @@
   <div class="common-layout">
     <el-container>
       <el-aside>
-        <div class="logo-container">Sam</div>
+<!--        <div class="logo-container">Logo</div>-->
         <el-menu
           :default-active="address"
           router
@@ -38,14 +38,15 @@
             <el-tag
               v-for="item in tags"
               :key="item.name"
-              effect="dark"
               closable
               @close="closeTag(item)"
               @click="clickTag(item)"
-              @change="onChange(item)"
               :class="item.url === address ? 'isActive' : ''"
             >
-              <span>{{ item.name }}</span>
+              <div class="sigle-tag">
+                <div v-show="item.url === address" class="white-point"></div>
+                <span>{{ item.name }}</span>
+              </div>
             </el-tag>
             <el-button v-show="tags.length !== 0" @click="closeTagList" size="small" type="danger" :icon="Delete" circle />
           </div>
@@ -77,41 +78,34 @@ export default {
     const menuList = reactive([
       {
         name: '首页',
-        type: 'primary',
         url: '/'
       },
       {
         name: '产品',
-        type: 'success',
         url: '/goods'
       },
       {
         name: '会员',
-        type: 'danger',
         url: '/member'
       },
       {
         name: '图表',
-        type: 'warning',
         url: '/chart',
         children: [
           {
             name: '线性图',
-            type: 'info',
             url: '/chart/lineChart'
           },
           {
             name: '饼图',
-            type: 'info',
             url: '/chart/pieChart'
           }
         ]
       }
     ])
     let tags = reactive([])
-    const address = ref('')
+    const address = ref('/')
     const store = useStore()
-    const checked = ref(false)
     tags = store.state.tag.tags
     address.value = router.currentRoute.value.path
 
@@ -155,13 +149,8 @@ export default {
       address.value = val.url
     }
 
-    const onChange = (item) => {
-      if (item.url === address.value) {
-        checked.value = true
-      }
-    }
-
     const closeTagList = () => {
+      router.push('/')
       tags.length = 0
       store.commit('tag/addTage', tags)
     }
@@ -176,8 +165,6 @@ export default {
       clickTag,
       address,
       clickEvent,
-      onChange,
-      checked,
       closeTagList,
       Delete
     }
@@ -261,12 +248,21 @@ export default {
         background-color: unset;
         color: #333333;
         border: 1px solid #c0bbbb;
-        span:before {
-        }
       }
       .isActive {
         background-color: #42b983;
         color: #ffffff;
+        .sigle-tag {
+          display: flex;
+          align-items: center;
+          .white-point {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            margin-right: 5px;
+          }
+        }
       }
       .close-icon {
         cursor: pointer;

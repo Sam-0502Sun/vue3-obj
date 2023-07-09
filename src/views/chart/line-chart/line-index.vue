@@ -1,5 +1,7 @@
 <template>
-  <div>线性图</div>
+  <div v-transverse-slide>
+    <div>线性图</div>
+  </div>
 </template>
 
 <script>
