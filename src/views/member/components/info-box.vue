@@ -1,14 +1,10 @@
 <template>
-  <div v-swipe-in>我是主页</div>
+  <div></div>
 </template>
 
 <script>
-
 export default {
-  name: 'HomeIndex',
-  components: {
-  },
-  setup () {}
+  name: 'InfoBox'
 }
 </script>
 
