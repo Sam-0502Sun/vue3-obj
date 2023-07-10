@@ -30,14 +30,14 @@ export default {
 .fullScreen-Btn {
   display: inline-block;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 }
 .el-icon svg {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 }
 .el-icon :hover {
-  color: blue;
+  color: #96969d;
 }
 </style>

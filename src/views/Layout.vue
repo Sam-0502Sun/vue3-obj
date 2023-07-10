@@ -2,7 +2,7 @@
   <div class="common-layout">
     <el-container>
       <el-aside>
-<!--        <div class="logo-container">Logo</div>-->
+        <!--        <div class="logo-container">Logo</div>-->
         <el-menu
           :default-active="address"
           router
@@ -13,28 +13,35 @@
         >
           <template v-for="item in menuList" :key="item.name">
             <el-menu-item v-if="item.children === undefined" @click="addTag(item)" :index="item.url">
-              <el-icon><aim /></el-icon>
-              <template #title>{{item.name}}</template>
+              <el-icon>
+                <aim/>
+              </el-icon>
+              <template #title>{{ item.name }}</template>
             </el-menu-item>
             <el-sub-menu v-else>
-              <template #title>{{item.name}}</template>
-              <el-menu-item v-for="i in item.children" :key="i.name" :index="i.url" @click="addTag(i)">{{i.name}}</el-menu-item>
+              <template #title>{{ item.name }}</template>
+              <el-menu-item v-for="i in item.children" :key="i.name" :index="i.url" @click="addTag(i)">{{ i.name }}
+              </el-menu-item>
             </el-sub-menu>
           </template>
         </el-menu>
       </el-aside>
       <el-container>
         <el-header>
+          <el-icon class="border-collapse" size="20" v-if="isCollapse === false" @click="changeAsideMenu">
+            <Fold/>
+          </el-icon>
+          <el-icon class="border-collapse" size="20" v-else @click="changeAsideMenu">
+            <Expand/>
+          </el-icon>
           <div class="header-right">
-            <screenfull id="screenfull" class="right-fullscreen" />
-            <Avatar class="avatar" @child = 'clickEvent' />
+            <screenfull id="screenfull" class="right-fullscreen"/>
+            <Avatar class="avatar" @child='clickEvent'/>
           </div>
         </el-header>
         <div class="main-top">
-          <el-icon class="border-collapse" size="20" v-if="isCollapse === false" @click="changeAsideMenu"><Fold /></el-icon>
-          <el-icon class="border-collapse" size="20" v-else @click="changeAsideMenu"><Expand /></el-icon>
           <div class="tag-group">
-            <span v-show="tags.length !== 0" class="tag-group__title">Tag标签</span>
+            <span v-show="tags.length !== 0" class="tag-group__title">标签栏</span>
             <el-tag
               v-for="item in tags"
               :key="item.name"
@@ -48,11 +55,12 @@
                 <span>{{ item.name }}</span>
               </div>
             </el-tag>
-            <el-button v-show="tags.length !== 0" @click="closeTagList" size="small" type="danger" :icon="Delete" circle />
+            <el-button v-show="tags.length !== 0" @click="closeTagList" size="small" type="danger" :icon="Delete"
+                       circle/>
           </div>
         </div>
         <el-main>
-          <router-view />
+          <router-view/>
         </el-main>
       </el-container>
     </el-container>
@@ -176,6 +184,7 @@ export default {
 .common-layout {
   width: 100%;
   height: 100vh;
+
   .el-container {
     width: 100%;
     height: 100vh;
@@ -183,64 +192,77 @@ export default {
     .logo-container {
       height: 60px;
     }
+
     .el-aside {
       width: unset;
       background-color: #304055;
+
       .el-menu {
         background-color: unset;
         border-right: 1px solid #333;
+
         .el-sub-menu {
           background-color: unset;
           color: #fff;
         }
       }
+
       .el-menu-item {
         display: flex;
         color: #fff;
       }
+
       .el-menu-item:hover {
         background-color: #1e2635;
       }
+
       .el-menu-item.is-active {
         color: #409eff;
       }
+
       .el-menu-vertical-demo:not(.el-menu--collapse) {
         width: 200px;
         min-height: 400px;
       }
     }
+
     .el-header {
       background-color: #fff;
       border-bottom: 1px solid #333;
       display: flex;
       align-items: center;
       position: relative;
+      height: 50px;
+
+      .border-collapse {
+        cursor: pointer;
+      }
+
       .header-right {
         position: absolute;
         right: 0;
         display: flex;
         align-items: center;
+
         .right-fullscreen {
           display: inline-block;
           margin: 0 5px;
         }
+
         .avatar {
           display: block;
           margin: 0 20px 0 5px;
         }
       }
     }
+
     .main-top {
-      height: 33px;
+      height: 29px;
       display: flex;
       align-items: center;
       line-height: 34px;
       border-bottom: 1px solid #333;
       padding: 0 10px;
-
-      .border-collapse {
-        cursor: pointer;
-      }
 
       .el-tag {
         margin: 0 5px;
@@ -249,12 +271,15 @@ export default {
         color: #333333;
         border: 1px solid #c0bbbb;
       }
+
       .isActive {
         background-color: #42b983;
         color: #ffffff;
+
         .sigle-tag {
           display: flex;
           align-items: center;
+
           .white-point {
             width: 8px;
             height: 8px;
@@ -264,10 +289,14 @@ export default {
           }
         }
       }
+
       .close-icon {
         cursor: pointer;
         align-items: center;
       }
+    }
+    .el-main {
+      background-color: #f0f2f5;
     }
   }
 }
@@ -276,6 +305,7 @@ export default {
 .el-menu {
   background-color: unset;
 }
+
 .el-sub-menu__title {
   color: #fff !important;
   font-size: 14px;
@@ -283,21 +313,26 @@ export default {
 
 .el-sub-menu__title:hover {
   background-color: #1e2635;
+
   .el-menu-item {
     display: flex;
     color: #fff;
   }
+
   .el-menu-item:hover {
     background-color: #1e2635;
   }
+
   .el-menu-item.is-active {
     color: #409eff;
   }
+
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
     min-height: 400px;
   }
 }
+
 .el-tag .el-tag__close {
   color: #333 !important;
 }
