@@ -29,10 +29,10 @@
       <el-container>
         <el-header>
           <el-icon class="border-collapse" size="20" v-if="isCollapse === false" @click="changeAsideMenu">
-            <Fold/>
+            <Fold />
           </el-icon>
           <el-icon class="border-collapse" size="20" v-else @click="changeAsideMenu">
-            <Expand/>
+            <Expand />
           </el-icon>
           <div class="header-right">
             <screenfull id="screenfull" class="right-fullscreen"/>
