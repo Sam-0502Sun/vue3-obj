@@ -16,7 +16,7 @@
           123
         </el-col>
         <el-col :span="6">
-          456
+          <InfoCard />
         </el-col>
       </el-row>
     </div>
@@ -54,6 +54,7 @@
 import TopBox from './components/top-box'
 import InfoBox from './components/info-box'
 import WorkBox from './components/work-box'
+import InfoCard from './components/info-card'
 import { ref } from 'vue'
 import { ElMessageBox } from 'element-plus'
 import { useStore } from 'vuex'
@@ -63,7 +64,8 @@ export default {
   components: {
     TopBox,
     InfoBox,
-    WorkBox
+    WorkBox,
+    InfoCard
   },
   setup () {
     const drawer = ref(false)
