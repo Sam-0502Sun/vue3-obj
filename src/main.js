@@ -10,6 +10,10 @@ import '@/assets/styles/common.less'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // 引入自定义指令
 import TransverseSlide from '@/utiles/directive/transverse-slide' // 横向滑入
+// 引入VueKinesis 组件
+import VueKinesis from 'vue-kinesis'
+// 引入水波纹动效
+import VWave from 'v-wave'
 
 const app = createApp(App)
 
@@ -21,4 +25,6 @@ app.directive('TransverseSlide', TransverseSlide) // 全局注册横向滑入指
 app.use(store)
 app.use(router)
 app.use(ElementPlus)
+app.use(VueKinesis)
+app.use(VWave)
 app.mount('#app')
