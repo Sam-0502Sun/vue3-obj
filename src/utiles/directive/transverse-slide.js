@@ -1,6 +1,6 @@
 // 滑入动效自定义指令
 const DISTANCE = -150
-const DURATION = 1500
+const DURATION = 800
 
 export default {
   mounted (el) {

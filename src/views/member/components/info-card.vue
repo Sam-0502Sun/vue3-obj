@@ -47,7 +47,7 @@ export default {
     0%{
       transform: scale(1);  /*开始为原始大小*/
     }
-    50%{
+    70%{
       transform: scale(1.2);
     }
     100%{

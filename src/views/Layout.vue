@@ -29,10 +29,10 @@
       <el-container>
         <el-header>
           <el-icon class="border-collapse" size="20" v-if="isCollapse === false" @click="changeAsideMenu">
-            <Fold />
+            <Fold/>
           </el-icon>
           <el-icon class="border-collapse" size="20" v-else @click="changeAsideMenu">
-            <Expand />
+            <Expand/>
           </el-icon>
           <div class="header-right">
             <screenfull id="screenfull" class="right-fullscreen"/>
@@ -98,17 +98,7 @@ export default {
       },
       {
         name: '图表',
-        url: '/chart',
-        children: [
-          {
-            name: '线性图',
-            url: '/chart/lineChart'
-          },
-          {
-            name: '饼图',
-            url: '/chart/pieChart'
-          }
-        ]
+        url: '/chart'
       }
     ])
     let tags = reactive([])
@@ -125,11 +115,9 @@ export default {
       const arr = store.state.tag.tags
       // 判断是否已经打开相关tag
       if (JSON.stringify(arr).includes(item.name)) {
-        console.log(true)
       } else {
         tags.push(item)
         store.commit('tag/addTage', tags)
-        console.log(false)
       }
       clickTag(item)
     }
@@ -295,11 +283,13 @@ export default {
         align-items: center;
       }
     }
+
     .el-main {
       background-color: #f0f2f5;
     }
   }
 }
+
 </style>
 <style lang="less">
 .el-menu {
