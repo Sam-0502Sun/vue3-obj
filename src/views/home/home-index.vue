@@ -16,16 +16,24 @@
           页
         </kinesis-element>
       </div>
-      <kinesis-element class="circle" type="depth" :strength="20">
-      </kinesis-element>
     </kinesis-container>
     <button v-wave="{
-  color: 'rebeccapurple',
-  initialOpacity: 0.5,
-  duration: 2,
-  easing: 'ease-in',
-}">primary
+      color: 'rebeccapurple',
+      initialOpacity: 0.5,
+      duration: 0.5,
+      easing: 'ease-in'
+    }">
+      primary
     </button>
+    <kinesis-container>
+      <kinesis-element
+        :strength="10"
+        type="depth"
+        class="circle"
+      >
+        <img src="../../assets/images/strobarry.jpg" alt="本地图片"/>
+      </kinesis-element>
+    </kinesis-container>
   </div>
 </template>
 
@@ -54,7 +62,7 @@ export default {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background-color: turquoise;
+    overflow: hidden;
   }
 }
 </style>
