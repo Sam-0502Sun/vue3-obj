@@ -34,12 +34,15 @@
           <el-icon class="border-collapse" size="20" v-else @click="changeAsideMenu">
             <Expand/>
           </el-icon>
+          <el-button type="primary" @click="changeDrawer">
+            open
+          </el-button>
           <div class="header-right">
             <screenfull id="screenfull" class="right-fullscreen"/>
             <Avatar class="avatar" @child='clickEvent'/>
           </div>
         </el-header>
-        <div class="main-top">
+        <div class="main-top" v-show="openValue === true">
           <div class="tag-group">
             <span v-show="tags.length !== 0" class="tag-group__title">标签栏</span>
             <el-tag
@@ -63,6 +66,15 @@
           <router-view/>
         </el-main>
       </el-container>
+      <el-drawer v-model="drawer" title="I am the title" :with-header="false">
+        <span>Hi there!</span>
+        <el-switch
+          v-model="switchValue"
+          class="ml-2"
+          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+          @change="changeSwitch"
+        />
+      </el-drawer>
     </el-container>
   </div>
 </template>
@@ -106,6 +118,18 @@ export default {
     const store = useStore()
     tags = store.state.tag.tags
     address.value = router.currentRoute.value.path
+    const drawer = ref(false)
+    const switchValue = ref(true)
+    const openValue = ref()
+    openValue.value = switchValue.value
+
+    const changeSwitch = () => {
+      openValue.value = switchValue.value
+    }
+
+    const changeDrawer = () => {
+      drawer.value = true
+    }
 
     const changeAsideMenu = () => {
       isCollapse.value = !isCollapse.value
@@ -149,6 +173,7 @@ export default {
       router.push('/')
       tags.length = 0
       store.commit('tag/addTage', tags)
+      address.value = '/'
     }
 
     return {
@@ -162,7 +187,12 @@ export default {
       address,
       clickEvent,
       closeTagList,
-      Delete
+      Delete,
+      changeDrawer,
+      drawer,
+      switchValue,
+      openValue,
+      changeSwitch
     }
   }
 }

@@ -7,7 +7,9 @@
     <el-tab-pane label="饼图" name="second">
       <PieIndex />
     </el-tab-pane>
-    <el-tab-pane label="Role" name="third">Role</el-tab-pane>
+    <el-tab-pane label="Role" name="third">
+      <ChartTestIndex />
+    </el-tab-pane>
     <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
   </el-tabs>
 </template>
@@ -15,6 +17,7 @@
 <script>
 import LineIndex from './line-chart/line-index'
 import PieIndex from './pie-chart/pie-index'
+import ChartTestIndex from './chart-test/chart-test-index'
 import { onBeforeMount, ref } from 'vue'
 import { TabsPaneContext } from 'element-plus'
 
@@ -22,7 +25,8 @@ export default {
   name: 'ChartIndex',
   components: {
     LineIndex,
-    PieIndex
+    PieIndex,
+    ChartTestIndex
   },
   setup () {
     const activeName = ref('first')
