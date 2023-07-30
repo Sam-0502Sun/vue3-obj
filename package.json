@@ -9,10 +9,11 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "core-js": "^3.6.5",
     "axios": "^0.21.1",
+    "core-js": "^3.6.5",
     "echarts": "^5.4.2",
     "element-plus": "^2.3.7",
+    "hooper": "^0.3.4",
     "screenfull": "4.2.0",
     "v-wave": "^1.5.1",
     "vue": "^3.0.0",
